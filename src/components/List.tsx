@@ -6,13 +6,19 @@ import { css } from '@emotion/native';
 
 const testStyles = css`
   // background-color: black;
-  border: 1px solid red;
+  // border: 1px solid red;
   width: 100%;
   text-align: center;
 `;
 
+const SeparatorStyles = css`
+  min-width: 50%;
+  width: 50%;
+  margin: 0 auto;
+`;
+
 const Separator = (): JSX.Element => {
-  return <View style={[styles.separator, { backgroundColor: '#000' }]} />
+  return <View style={[styles.separator, SeparatorStyles, { backgroundColor: '#000' }]} />
 }
 
 
@@ -41,7 +47,7 @@ const styles = StyleSheet.create({
   },
   separator: {
     height: 1,
-    minWidth: '20%'
+    // minWidth: '20%'
     // backgroundColor: '#ced0ce'
   },
 });

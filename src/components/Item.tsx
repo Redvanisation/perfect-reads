@@ -3,7 +3,7 @@ import { css } from '@emotion/native';
 
 const testStyles = css`
   // background-color: red;
-  border: 1px solid red;
+  // border: 1px solid red;
   width: 100%;
   text-align: center;
 `;
