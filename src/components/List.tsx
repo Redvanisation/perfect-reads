@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { FlatList, View, StyleSheet, SafeAreaView } from 'react-native';
+import { FlatList, View, StyleSheet, SafeAreaView, Dimensions } from 'react-native';
 import * as data from '../../dummy-data.json';
 import Item from './Item';
 import { css } from '@emotion/native';
+import { useFetchData } from '../hooks/useFetchData';
+import { googleBooksBaseUrl } from '../utils/constants';
 
 const testStyles = css`
   // background-color: black;
   // border: 1px solid red;
-  width: 100%;
-  text-align: center;
+  // width: 100%;
+  // text-align: center;
+  
 `;
 
 const SeparatorStyles = css`
@@ -23,17 +26,26 @@ const Separator = (): JSX.Element => {
 
 
 export default function List({navigation}:any): JSX.Element {
-  const [books,] = useState(data.items);
+  // const [books,] = useState(data.items);
+  const { data, loading, error } = useFetchData(`${googleBooksBaseUrl}?q=drama`);
+
+  console.log(data)
+
+  // const {width} = Dimensions.get('window');
+  // const itemWidth = (width) / 4;
+
   return (
     <SafeAreaView>
       <FlatList
-        data={books}
+        key={'_'}
+        data={data}
         renderItem={({ item }: any) => <Item item={item} navigation={navigation} />}
         keyExtractor={(item: any) => item.id}
-        ItemSeparatorComponent={() => <Separator />}
-        style={testStyles}
+        // ItemSeparatorComponent={() => <Separator />}
+        style={styles.flatList}
         scrollEnabled
-        contentContainerStyle={{ alignItems: 'center' }}
+        contentContainerStyle={{ alignItems: 'center', justifyContent: 'center', margin: 5, }}
+        numColumns={2}
       />
     </SafeAreaView>
   )
@@ -41,6 +53,8 @@ export default function List({navigation}:any): JSX.Element {
 
 const styles = StyleSheet.create({
   flatList: {
+    margin: 10,
+    width: '100%',
     // borderWidth: 1,
     // borderStyle: 'solid',
     // borderColor: 'blue',

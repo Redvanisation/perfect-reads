@@ -6,6 +6,22 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Homepage from './src/screens/Homepage';
 
+import {
+  AnimatedTabBarNavigator,
+  DotSize, // optional
+  TabElementDisplayOptions, // optional
+  TabButtonLayout, // optional
+  IAppearanceOptions // optional
+} from 'react-native-animated-nav-tab-bar'
+
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+interface ITabBarIconProps {
+  focused: boolean;
+  color: string;
+  size: number;
+}
+
 function SettingsScreen() {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -36,7 +52,8 @@ const LoginComponent = ({ setIsLoggedIn }: any) => {
     );
 };
 
-const Tab = createBottomTabNavigator();
+// const Tab = createBottomTabNavigator();
+const Tab = AnimatedTabBarNavigator();
 
 export default function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -45,7 +62,45 @@ export default function App() {
         <>
             {isLoggedIn ? (
                 <NavigationContainer>
-                    <Tab.Navigator>
+                    <Tab.Navigator
+                      tabBarOptions={{
+                        // activeTintColor: "#2F7C6E",
+                        inactiveTintColor: "#222222"
+                      }}
+                      appearance={{
+                        shadow: true,
+                        // whenActiveShow: TabElementDisplayOptions.ICON_ONLY,
+                        // dotSize: DotSize.SMALL
+                      }}
+                      screenOptions={({ route }) => ({
+                        tabBarIcon: ({ focused, color, size }: ITabBarIconProps) => {
+                          let iconName;
+                          // size = focused ? size + 10 : size;
+              
+                          if (route.name === 'Home') {
+                            iconName = focused
+                              ? 'ios-home'
+                              : 'ios-home-outline';
+                          } else if (route.name === 'Settings') {
+                            iconName = focused ? 'ios-settings' : 'ios-settings-outline';
+                          }
+              
+                          // You can return any component that you like here!
+                          return <Ionicons name={iconName} size={size} color={color} />;
+                        },
+                        tabBarIconStyle: {
+                          transition: 'all 0.3s ease-in-out',
+                        },
+                        tabBarActiveTintColor: '#ff0000',
+                        tabBarInactiveTintColor: 'gray',
+                        tabBarShowLabel: false,
+                        tabBarStyle: {
+                          // backgroundColor: 'orangered',
+                          height: 100,
+                          transition: 'all 0.5s',
+                        }
+                      })}
+                    >
                         <Tab.Screen
                             name='Home'
                             component={Homepage}
