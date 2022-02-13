@@ -18,7 +18,7 @@ export default function Item({ item, navigation }: any): JSX.Element {
 
   return (
     <TouchableOpacity style={styles.item} onPress={handlePress}>
-      <Image style={styles.img} source={{ uri: item.volumeInfo.imageLinks.thumbnail }} />
+      <Image style={styles.img} source={{ uri: item?.volumeInfo?.imageLinks?.thumbnail }} />
     </TouchableOpacity>
   );
 }

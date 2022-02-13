@@ -1,38 +1,46 @@
 import { useState } from "react";
-import { FlatList, View, StyleSheet, SafeAreaView, Dimensions } from 'react-native';
-import * as data from '../../dummy-data.json';
+import { FlatList, Text, View, StyleSheet, SafeAreaView, Dimensions } from 'react-native';
+// import * as data from '../../dummy-data.json';
 import Item from './Item';
 import { css } from '@emotion/native';
-import { useFetchData } from '../hooks/useFetchData';
-import { googleBooksBaseUrl } from '../utils/constants';
 
-const testStyles = css`
-  // background-color: black;
-  // border: 1px solid red;
-  // width: 100%;
-  // text-align: center;
+
+// const testStyles = css`
+//   // background-color: black;
+//   // border: 1px solid red;
+//   // width: 100%;
+//   // text-align: center;
   
-`;
+// `;
 
-const SeparatorStyles = css`
-  min-width: 50%;
-  width: 50%;
-  margin: 0 auto;
-`;
+// const SeparatorStyles = css`
+//   min-width: 50%;
+//   width: 50%;
+//   margin: 0 auto;
+// `;
 
-const Separator = (): JSX.Element => {
-  return <View style={[styles.separator, SeparatorStyles, { backgroundColor: '#000' }]} />
-}
+// const Separator = (): JSX.Element => {
+//   return <View style={[styles.separator, SeparatorStyles, { backgroundColor: '#000' }]} />
+// }
 
 
-export default function List({navigation}:any): JSX.Element {
+function List({ navigation, data, loading, error }: any): JSX.Element {
   // const [books,] = useState(data.items);
-  const { data, loading, error } = useFetchData(`${googleBooksBaseUrl}?q=drama`);
 
   console.log(data)
 
   // const {width} = Dimensions.get('window');
   // const itemWidth = (width) / 4;
+
+  if (error) {
+    return <Text>Error!</Text>
+  }
+
+  if (loading) {
+    return <Text>Loading...</Text>
+  }
+
+  // console
 
   return (
     <SafeAreaView>
@@ -65,3 +73,5 @@ const styles = StyleSheet.create({
     // backgroundColor: '#ced0ce'
   },
 });
+
+export default List;

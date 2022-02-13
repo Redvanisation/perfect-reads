@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Text, Button, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Homepage from './src/screens/Homepage';
 
 import {
@@ -30,13 +30,13 @@ function SettingsScreen() {
     );
 }
 
-function Foo() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Settings!</Text>
-        </View>
-    );
-}
+// function Foo() {
+//     return (
+//         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//             <Text>Settings!</Text>
+//         </View>
+//     );
+// }
 
 const LoginComponent = ({ setIsLoggedIn }: any) => {
     const handleLogin = () => {
@@ -88,17 +88,6 @@ export default function App() {
                           // You can return any component that you like here!
                           return <Ionicons name={iconName} size={size} color={color} />;
                         },
-                        tabBarIconStyle: {
-                          transition: 'all 0.3s ease-in-out',
-                        },
-                        tabBarActiveTintColor: '#ff0000',
-                        tabBarInactiveTintColor: 'gray',
-                        tabBarShowLabel: false,
-                        tabBarStyle: {
-                          // backgroundColor: 'orangered',
-                          height: 100,
-                          transition: 'all 0.5s',
-                        }
                       })}
                     >
                         <Tab.Screen

@@ -11,27 +11,35 @@ const textStyles = css`
 
 export default function BookDetails({ route }: any): JSX.Element {
   const item = route.params;
-  const pdfDownloadLink = item.accessInfo.pdf.acsTokenLink;
-  const epubDownloadLink = item.accessInfo.epub.acsTokenLink;
   
-  const downloadPdf = () => goToUrl(pdfDownloadLink);
-  const downloadEpub = () => goToUrl(epubDownloadLink);
-  console.log(item.accessInfo.pdf.isAvailable)
-  console.log(item.accessInfo.epub.isAvailable)
+  const isPdfDownloadable = Boolean(item.accessInfo.pdf.acsTokenLink);
+  const isEpubDownloadable = Boolean(item.accessInfo.epub.acsTokenLink);
+  
+  const downloadPdf = () => goToUrl(item.accessInfo.pdf.acsTokenLink);
+  const downloadEpub = () => goToUrl(item.accessInfo.epub.acsTokenLink);
+  
+  console.log(item.accessInfo)
+  // console.log(epubDownloadLink) 
   
   return (
     <ScrollView 
       style={styles.view}
       contentContainerStyle={{ alignItems: 'center', }}
     >
-      <Image style={styles.img} source={{ uri: item.volumeInfo.imageLinks.thumbnail }} />
-      <Text><Text style={[styles.text, textStyles]}>Title:</Text> {item.volumeInfo.title}</Text>
-      <Text><Text style={[styles.text, textStyles]}>Author:</Text> {item.volumeInfo.authors[0]}</Text>
-      <Text><Text style={[styles.text, textStyles]}>Category:</Text> {item.volumeInfo.categories[0]}</Text>
+      <Image style={styles.img} source={{ uri: item?.volumeInfo?.imageLinks?.thumbnail }} />
+      <Text>
+        <Text style={[styles.text, textStyles]}>Title:</Text> {item.volumeInfo.title}
+      </Text>
+      <Text>
+        <Text style={[styles.text, textStyles]}>Author:</Text> {item.volumeInfo.authors?.[0]}
+      </Text>
+      <Text>
+        <Text style={[styles.text, textStyles]}>Category:</Text> {item.volumeInfo.categories?.[0]}
+      </Text>
       <Text style={[styles.text, styles.description, textStyles]}>{item.volumeInfo.description}</Text>
       <View style={styles.download_button_container}>
-        {item.accessInfo.epub.isAvailable && <TouchableOpacity style={styles.download_button} onPress={downloadEpub}><Text style={styles.download_button__text}>EPUB</Text></TouchableOpacity>}
-        {item.accessInfo.pdf.isAvailable && <TouchableOpacity style={styles.download_button} onPress={downloadPdf}><Text style={styles.download_button__text}>PDF</Text></TouchableOpacity>}
+        {isPdfDownloadable && <TouchableOpacity style={styles.download_button} onPress={downloadEpub}><Text style={styles.download_button__text}>EPUB</Text></TouchableOpacity>}
+        {isEpubDownloadable && <TouchableOpacity style={styles.download_button} onPress={downloadPdf}><Text style={styles.download_button__text}>PDF</Text></TouchableOpacity>}
       </View>
     </ScrollView> 
   );

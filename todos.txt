@@ -1,0 +1,11 @@
+
+//TODO
+
+1. Create users profiles
+2. implement secure logins
+3. Add the ability to users to favorit books
+4. Add context or redux
+5. Create a profile page
+6. Give the user the ability to update their profile
+7. Style the app properly
+8. Add TS interfaces
