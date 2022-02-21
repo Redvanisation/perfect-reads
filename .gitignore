@@ -106,3 +106,7 @@ dist
 *.jpg
 
 .DS_Store
+
+.expo/
+
+.idea/
