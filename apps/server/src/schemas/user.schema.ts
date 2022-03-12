@@ -9,10 +9,13 @@ export class User {
   firstName: string;
 
   @Prop({ required: true })
-  lastName: number;
+  lastName: string;
 
   @Prop({ required: true, unique: true })
   email: string;
+
+  @Prop({ required: true })
+  password: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
