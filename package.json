@@ -1,0 +1,13 @@
+{
+  "name": "perfect-reads",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Redvanisation/perfect-reads.git",
+  "author": "Radouane Khiri <redvanisation@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start:server": "cd apps/server && nest start --watch",
+    "start:app": "cd apps/mobile && yarn start"
+  },
+  "dependencies": {}
+}
