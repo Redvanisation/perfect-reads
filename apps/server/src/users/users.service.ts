@@ -35,10 +35,16 @@ export class UsersService {
   }
 
   async update(id: string, body: CreateUserDto): Promise<User> {
-    const hashedPassword = await hashUserPassword(body.password);
-    console.log(hashedPassword);
-    body.password = hashedPassword;
-    return this.userModel.findOneAndUpdate({ _id: id }, body).exec();
+    try {
+      if (body.password) {
+        const hashedPassword = await hashUserPassword(body.password);
+        body.password = hashedPassword;
+      }
+
+      return this.userModel.findOneAndUpdate({ _id: id }, body).exec();
+    } catch (err) {
+      throw new HttpException(err, 400);
+    }
   }
 
   async delete(id: string): Promise<User> {
