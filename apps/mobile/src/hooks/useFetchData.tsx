@@ -1,15 +1,20 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export const useFetchData = (url, options) => {
-  const [state, setState] = useState({
+interface State {
+  data: any;
+  loading: boolean;
+  error: string | unknown | null;
+};
+
+export const useFetchData = (url: string, options: any) => {
+  const [state, setState] = useState<State>({
     data: [],
     loading: false,
     error: null,
   });
 
-  useEffect( async () => {
-    setState({ data: [], loading: true, error: null });
+  const fetchData = async (): Promise<void> => {
     try {
       const data = await axios(url, options);
       setState({ data: data.data.items, loading: false, error: null });
@@ -18,6 +23,11 @@ export const useFetchData = (url, options) => {
     } finally {
       console.log('Fetching done!');
     }
+  }
+
+  useEffect( () => {
+    setState({ data: [], loading: true, error: null });
+    fetchData();
   }, [url, options]);
 
   return state;

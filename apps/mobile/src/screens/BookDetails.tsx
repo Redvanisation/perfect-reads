@@ -1,13 +1,8 @@
 import { useCallback } from 'react';
 import { View, Text, Image, StyleSheet, Linking, Button, TouchableOpacity, ScrollView } from 'react-native';
 import Item from '../components/Item';
-import { css } from '@emotion/native';
 import { goToUrl } from '../utils/goToUrl';
 
-const textStyles = css`
-  // border: 1px solid red;
-  // font-weight: bold;
-`;
 
 export default function BookDetails({ route }: any): JSX.Element {
   const item = route.params;
@@ -18,7 +13,7 @@ export default function BookDetails({ route }: any): JSX.Element {
   const downloadPdf = () => goToUrl(item.accessInfo.pdf.acsTokenLink);
   const downloadEpub = () => goToUrl(item.accessInfo.epub.acsTokenLink);
   
-  console.log(item.accessInfo)
+  // console.log(item.accessInfo)
   // console.log(epubDownloadLink) 
   
   return (
@@ -28,15 +23,15 @@ export default function BookDetails({ route }: any): JSX.Element {
     >
       <Image style={styles.img} source={{ uri: item?.volumeInfo?.imageLinks?.thumbnail }} />
       <Text>
-        <Text style={[styles.text, textStyles]}>Title:</Text> {item.volumeInfo.title}
+        <Text style={styles.text}>Title:</Text> {item.volumeInfo.title}
       </Text>
       <Text>
-        <Text style={[styles.text, textStyles]}>Author:</Text> {item.volumeInfo.authors?.[0]}
+        <Text style={styles.text}>Author:</Text> {item.volumeInfo.authors?.[0]}
       </Text>
       <Text>
-        <Text style={[styles.text, textStyles]}>Category:</Text> {item.volumeInfo.categories?.[0]}
+        <Text style={styles.text}>Category:</Text> {item.volumeInfo.categories?.[0]}
       </Text>
-      <Text style={[styles.text, styles.description, textStyles]}>{item.volumeInfo.description}</Text>
+      <Text style={[styles.text, styles.description]}>{item.volumeInfo.description}</Text>
       <View style={styles.download_button_container}>
         {isPdfDownloadable && <TouchableOpacity style={styles.download_button} onPress={downloadEpub}><Text style={styles.download_button__text}>EPUB</Text></TouchableOpacity>}
         {isEpubDownloadable && <TouchableOpacity style={styles.download_button} onPress={downloadPdf}><Text style={styles.download_button__text}>PDF</Text></TouchableOpacity>}
