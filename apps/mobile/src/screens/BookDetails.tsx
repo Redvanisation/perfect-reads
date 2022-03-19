@@ -23,15 +23,15 @@ export default function BookDetails({ route }: any): JSX.Element {
     >
       <Image style={styles.img} source={{ uri: item?.volumeInfo?.imageLinks?.thumbnail }} />
       <Text>
-        <Text style={styles.text}>Title:</Text> {item.volumeInfo.title}
+        <Text style={styles.text}>Title:</Text> {item?.volumeInfo?.title}
       </Text>
       <Text>
-        <Text style={styles.text}>Author:</Text> {item.volumeInfo.authors?.[0]}
+        <Text style={styles.text}>Author:</Text> {item?.volumeInfo?.authors?.[0] || 'N/A'}
       </Text>
       <Text>
-        <Text style={styles.text}>Category:</Text> {item.volumeInfo.categories?.[0]}
+        <Text style={styles.text}>Category:</Text> {item?.volumeInfo?.categories?.[0] || 'N/A'}
       </Text>
-      <Text style={[styles.text, styles.description]}>{item.volumeInfo.description}</Text>
+      <Text style={[styles.text, styles.description]}>{item?.volumeInfo?.description}</Text>
       <View style={styles.download_button_container}>
         {isPdfDownloadable && <TouchableOpacity style={styles.download_button} onPress={downloadEpub}><Text style={styles.download_button__text}>EPUB</Text></TouchableOpacity>}
         {isEpubDownloadable && <TouchableOpacity style={styles.download_button} onPress={downloadPdf}><Text style={styles.download_button__text}>PDF</Text></TouchableOpacity>}

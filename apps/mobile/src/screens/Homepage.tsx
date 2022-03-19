@@ -45,7 +45,7 @@ export default function Homepage({ navigation }: any): JSX.Element {
 
     const [searchTerm, setSearchTerm] = useState('');
 
-    const filtredData = data.filter((item: any) => item.volumeInfo.title.includes(searchTerm));
+    const filtredData = data.filter((item: any) => item.volumeInfo.title?.includes?.(searchTerm));
 
     return (
         <Stack.Navigator>

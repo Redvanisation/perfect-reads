@@ -7,7 +7,7 @@ interface State {
   error: string | unknown | null;
 };
 
-export const useFetchData = (url: string, options: any) => {
+export const useFetchData = (url: string) => {
   const [state, setState] = useState<State>({
     data: [],
     loading: false,
@@ -16,7 +16,7 @@ export const useFetchData = (url: string, options: any) => {
 
   const fetchData = async (): Promise<void> => {
     try {
-      const data = await axios(url, options);
+      const data = await axios(url);
       setState({ data: data.data.items, loading: false, error: null });
     } catch (error) {
       setState({ data: [], loading: false, error });
@@ -28,7 +28,7 @@ export const useFetchData = (url: string, options: any) => {
   useEffect( () => {
     setState({ data: [], loading: true, error: null });
     fetchData();
-  }, [url, options]);
+  }, [url]);
 
   return state;
 };
