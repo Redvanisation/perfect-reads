@@ -2,6 +2,8 @@ import React, { useState, createContext } from 'react';
 import axios from 'axios';
 import { UserLoginData, State, AuthContextData } from '../types/auth';
 import { SERVER_URL } from '../utils/constants';
+import { useDispatch } from 'react-redux';
+import { setUser, clearUser } from '../redux/slices/user/userSlice';
 
 type Props = {
   children: React.ReactNode;
@@ -10,8 +12,9 @@ type Props = {
 export const AuthContext = createContext<AuthContextData>(null);
 
 export default function AuthProvider({ children }: Props) {
+  const dispatch = useDispatch();
+
   const [state, setState] = useState<State>({
-    user: null,
     isLoggedIn: false,
     isLoading: false,
     error: null,
@@ -20,18 +23,17 @@ export default function AuthProvider({ children }: Props) {
   const login = async (userData: UserLoginData) => {
     setState({ ...state, isLoading: true });
     
-    const user = await axios.post(`${SERVER_URL}/auth/login`, userData);
-
-    if (user) {
+    const response = await axios.post(`${SERVER_URL}/auth/login`, userData);
+    
+    if (response.status === 200 || response.status === 201) {
+      dispatch(setUser(response.data));
       setState({
-        user: user.data,
         isLoggedIn: true,
         isLoading: false,
         error: null,
       });
     } else {
       setState({
-        user: null,
         isLoggedIn: false,
         isLoading: false,
         error: 'Login failed',
@@ -40,8 +42,8 @@ export default function AuthProvider({ children }: Props) {
   };
 
   const logout = () => {
+    dispatch(clearUser());
     setState({
-      user: null,
       isLoggedIn: false,
       isLoading: false,
       error: '',

@@ -4,7 +4,7 @@ export type UserLoginData = {
 };
 
 export type State = {
-  user: UserLoginData | null;
+  // user: UserLoginData | null;
   isLoggedIn: boolean;
   isLoading: boolean;
   error: string | null;

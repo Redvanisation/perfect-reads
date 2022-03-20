@@ -10,7 +10,7 @@ type AuthUser = {
   password: string;
 }
 
-const mapAuthenticatedUser = ({ _id, firstName, lastName, email, password }: AuthUser) => ({ _id, firstName, lastName, email });
+const mapAuthenticatedUser = ({ _id, firstName, lastName, email, password }: AuthUser) => ({ id: _id, firstName, lastName, email });
 @Injectable()
 export class AuthService {
   constructor(private usersService: UsersService) {}
