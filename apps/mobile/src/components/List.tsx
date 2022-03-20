@@ -1,33 +1,12 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { FlatList, Text, View, StyleSheet, SafeAreaView, Dimensions } from 'react-native';
-// import * as data from '../../dummy-data.json';
 import Item from './Item';
-import { css } from '@emotion/native';
-
-
-// const testStyles = css`
-//   // background-color: black;
-//   // border: 1px solid red;
-//   // width: 100%;
-//   // text-align: center;
-  
-// `;
-
-// const SeparatorStyles = css`
-//   min-width: 50%;
-//   width: 50%;
-//   margin: 0 auto;
-// `;
-
-// const Separator = (): JSX.Element => {
-//   return <View style={[styles.separator, SeparatorStyles, { backgroundColor: '#000' }]} />
-// }
 
 
 function List({ navigation, data, loading, error }: any): JSX.Element {
   // const [books,] = useState(data.items);
 
-  console.log(data)
+  // console.log(data)
 
   // const {width} = Dimensions.get('window');
   // const itemWidth = (width) / 4;

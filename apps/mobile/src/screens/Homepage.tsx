@@ -17,6 +17,8 @@ import { useFetchData } from '../hooks/useFetchData';
 import { googleBooksBaseUrl } from '../utils/constants';
 import SearchBar from '../components/SearchBar';
 import SelectCategory from '../components/SelectCategory';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 const categories = [
   'Art',
@@ -43,9 +45,13 @@ export default function Homepage({ navigation }: any): JSX.Element {
     const [category, setCategory] = useState('programming');
     const { data, loading, error } = useFetchData(`${googleBooksBaseUrl}?q=${category}&maxResults=30`);
 
+    const user = useSelector((state: RootState) => state.user);
+
+    console.log(user);
+
     const [searchTerm, setSearchTerm] = useState('');
 
-    const filtredData = data.filter((item: any) => item.volumeInfo.title.includes(searchTerm));
+    const filtredData = data.filter((item: any) => item.volumeInfo.title?.includes?.(searchTerm));
 
     return (
         <Stack.Navigator>
