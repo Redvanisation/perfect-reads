@@ -7,23 +7,24 @@ import { AuthContext } from '../providers/AuthProvider';
 import Homepage from './Homepage';
 
 import {
-  AnimatedTabBarNavigator,
-  DotSize, // optional
-  TabElementDisplayOptions, // optional
-  TabButtonLayout, // optional
-  IAppearanceOptions // optional
-} from 'react-native-animated-nav-tab-bar'
+    AnimatedTabBarNavigator,
+    DotSize, // optional
+    TabElementDisplayOptions, // optional
+    TabButtonLayout, // optional
+    IAppearanceOptions, // optional
+} from 'react-native-animated-nav-tab-bar';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import LoginComponent from '../components/LoginComponent';
 import UserProfileScreen from './UserProfileScreen';
-import {  useAuthUser } from '../hooks/useAuthUser';
+import { useAuthUser } from '../hooks/useAuthUser';
+import LoginNavigator from './LoginNavigator';
 
 interface ITabBarIconProps {
-  focused: boolean;
-  color: string;
-  size: number;
+    focused: boolean;
+    color: string;
+    size: number;
 }
 
 function SettingsScreen() {
@@ -38,54 +39,46 @@ const Tab = AnimatedTabBarNavigator();
 
 export default function Main() {
     const { isLoggedIn } = useAuthUser(AuthContext);
- 
+
     return (
-        <>
+        <NavigationContainer>
             {isLoggedIn ? (
-                <NavigationContainer>
-                    <Tab.Navigator
-                      tabBarOptions={{
+                <Tab.Navigator
+                    tabBarOptions={{
                         // activeTintColor: "#2F7C6E",
-                        inactiveTintColor: "#222222"
-                      }}
-                      appearance={{
+                        inactiveTintColor: '#222222',
+                    }}
+                    appearance={{
                         shadow: true,
                         // whenActiveShow: TabElementDisplayOptions.ICON_ONLY,
                         // dotSize: DotSize.SMALL
-                      }}
-                      screenOptions={({ route }) => ({
+                    }}
+                    screenOptions={({ route }) => ({
                         tabBarIcon: ({ focused, color, size }: ITabBarIconProps) => {
-                          let iconName;
-                          // size = focused ? size + 10 : size;
-              
-                          if (route.name === 'Home') {
-                            iconName = focused
-                              ? 'ios-home'
-                              : 'ios-home-outline';
-                          } else if (route.name === 'Settings') {
-                            iconName = focused ? 'ios-settings' : 'ios-settings-outline';
-                          } else if (route.name === 'Profile') {
-                            iconName = focused ? 'ios-person' : 'ios-person-outline';
-                          }
-              
-                          // You can return any component that you like here!
-                          return <Ionicons name={iconName} size={size} color={color} />;
+                            let iconName;
+                            // size = focused ? size + 10 : size;
+
+                            if (route.name === 'Home') {
+                                iconName = focused ? 'ios-home' : 'ios-home-outline';
+                            } else if (route.name === 'Settings') {
+                                iconName = focused ? 'ios-settings' : 'ios-settings-outline';
+                            } else if (route.name === 'Profile') {
+                                iconName = focused ? 'ios-person' : 'ios-person-outline';
+                            }
+
+                            // You can return any component that you like here!
+                            return <Ionicons name={iconName} size={size} color={color} />;
                         },
-                      })}
-                    >
-                        <Tab.Screen
-                            name='Home'
-                            component={Homepage}
-                            options={{ headerShown: false }}
-                        />
-                        <Tab.Screen name='Profile' component={UserProfileScreen} />
-                        <Tab.Screen name='Settings' component={SettingsScreen} />
-                    </Tab.Navigator>
-                </NavigationContainer>
+                    })}
+                >
+                    <Tab.Screen name='Home' component={Homepage} options={{ headerShown: false }} />
+                    <Tab.Screen name='Profile' component={UserProfileScreen} />
+                    <Tab.Screen name='Settings' component={SettingsScreen} />
+                </Tab.Navigator>
             ) : (
-                <LoginComponent />
+                <LoginNavigator />
             )}
-        </>
+        </NavigationContainer>
     );
 }
 
