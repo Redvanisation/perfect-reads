@@ -71,14 +71,17 @@ const styles = StyleSheet.create({
     loginButton: {
         backgroundColor: '#2296F3',
         color: '#fff',
+        marginTop: 10,
         paddingVertical: 12,
         paddingHorizontal: 20,
         borderRadius: 10,
+        width: '70%',
     },
     loginButtonText: {
         color: '#fff',
         fontSize: 18,
         fontWeight: '600',
+        textAlign: 'center',
     },
     input: {
         height: 40,
