@@ -10,7 +10,7 @@ export default function LoginComponent({ navigation }: any): JSX.Element {
     });
 
     // const authContext = useContext(AuthContext);
-    const { login, error } = useAuthUser(AuthContext);
+    const { login, error, resetLoginErrors } = useAuthUser(AuthContext);
 
     const handleDataChange = (name: string, value: string): void => {
         setUserLoginData(prevData => ({
@@ -24,6 +24,7 @@ export default function LoginComponent({ navigation }: any): JSX.Element {
     };
 
     const navigateToSignUpScreen = useCallback(() => {
+        resetLoginErrors();
         navigation.navigate('Sign up');
     }, []);
 

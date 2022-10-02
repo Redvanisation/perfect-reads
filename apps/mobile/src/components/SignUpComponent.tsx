@@ -8,9 +8,14 @@ import {
     StyleSheet,
     Pressable,
 } from 'react-native';
+import { useAuthUser } from '../hooks/useAuthUser';
+import { AuthContext } from '../providers/AuthProvider';
 
 export default function SignUpComponent({ navigation }: any): JSX.Element {
+    const { resetLoginErrors } = useAuthUser(AuthContext);
+
     const navigateToLoginScreen = useCallback(() => {
+        resetLoginErrors();
         navigation.navigate('Login');
     }, []);
 
