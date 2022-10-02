@@ -57,12 +57,21 @@ export default function AuthProvider({ children }: Props) {
         });
     };
 
+    const resetLoginErrors = () => {
+        setState({
+            ...state,
+            isLoading: false,
+            error: null,
+        });
+    };
+
     return (
         <AuthContext.Provider
             value={{
                 state,
                 login,
                 logout,
+                resetLoginErrors,
             }}
         >
             {children}

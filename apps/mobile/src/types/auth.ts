@@ -14,4 +14,5 @@ export type AuthContextData = {
   state: State;
   login: (user: UserLoginData) => void;
   logout: () => void;
+  resetLoginErrors: () => void;
 } | null;
