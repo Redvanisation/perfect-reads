@@ -40,7 +40,6 @@ export default function AuthProvider({ children }: Props) {
                 });
             }
         } catch (error) {
-            console.log('ERR', error);
             setState({
                 isLoggedIn: false,
                 isLoading: false,
