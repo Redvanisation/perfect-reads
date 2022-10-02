@@ -10,7 +10,7 @@ export default function LoginComponent({ navigation }: any): JSX.Element {
     });
 
     // const authContext = useContext(AuthContext);
-    const { login } = useAuthUser(AuthContext);
+    const { login, error } = useAuthUser(AuthContext);
 
     const handleDataChange = (name: string, value: string): void => {
         setUserLoginData(prevData => ({
@@ -42,6 +42,7 @@ export default function LoginComponent({ navigation }: any): JSX.Element {
                 value={userLoginData.password}
                 style={styles.input}
             />
+            {error && <Text style={styles.error}>{error.toString()}</Text>}
             <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
                 <Text style={styles.loginButtonText}>Login</Text>
             </TouchableOpacity>
@@ -98,5 +99,11 @@ const styles = StyleSheet.create({
     },
     singUp: {
         color: '#2296F3',
+    },
+    error: {
+        color: 'red',
+        marginTop: 10,
+        marginBottom: 20,
+        fontWeight: 'bold',
     },
 });
